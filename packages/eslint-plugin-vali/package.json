@@ -1,0 +1,41 @@
+{
+  "name": "@promptnroll/eslint-plugin-vali",
+  "version": "0.4.0",
+  "description": "ESLint plugin for Vali AI code quality rules",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.0.0",
+    "@promptnroll/vali": "^0.4.0"
+  },
+  "dependencies": {
+    "ts-morph": "^23.0.0"
+  },
+  "devDependencies": {
+    "@promptnroll/vali": "file:../..",
+    "tsup": "^8.0.0",
+    "vitest": "^2.0.0"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "vali",
+    "ai",
+    "code-quality"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "@promptnroll/vali",
+  "version": "0.4.0",
+  "description": "AI 생성 코드의 환각, 슬롭, 과잉설계를 자동 감지하는 린터",
+  "type": "module",
+  "bin": {
+    "vali": "dist/cli/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js"
+    },
+    "./rules": {
+      "types": "./dist/rules/index.d.ts",
+      "import": "./dist/rules/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:plugin": "cd packages/eslint-plugin-vali && tsup src/index.ts --format esm --dts",
+    "build:all": "npm run build && npm run build:plugin",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build:all && npm run test",
+    "publish:dryrun": "npm pack --dry-run && cd packages/eslint-plugin-vali && npm pack --dry-run",
+    "publish:all": "npm publish --access public && cd packages/eslint-plugin-vali && npm publish --access public"
+  },
+  "keywords": [
+    "ai",
+    "linter",
+    "code-quality",
+    "hallucination",
+    "slop",
+    "copilot",
+    "claude",
+    "cursor"
+  ],
+  "author": "Ryan",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "fast-glob": "^3.3.0",
+    "ts-morph": "^23.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "execa": "^9.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

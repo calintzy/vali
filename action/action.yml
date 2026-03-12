@@ -1,0 +1,42 @@
+name: 'Vali - AI Code Quality Check'
+description: 'AI 생성 코드의 환각, 슬롭, 과잉설계를 자동 감지'
+branding:
+  icon: 'shield'
+  color: 'blue'
+inputs:
+  path:
+    description: '검사할 디렉토리 경로'
+    required: false
+    default: 'src/'
+  format:
+    description: '출력 형식 (terminal, json, sarif)'
+    required: false
+    default: 'terminal'
+  fix:
+    description: '자동 수정 적용 여부'
+    required: false
+    default: 'false'
+  diff:
+    description: 'git diff 기준 변경 파일만 검사'
+    required: false
+    default: 'false'
+  comment:
+    description: 'PR에 결과 코멘트 게시 여부'
+    required: false
+    default: 'true'
+  token:
+    description: 'GitHub token (PR 코멘트에 필요)'
+    required: false
+    default: ${{ github.token }}
+outputs:
+  score:
+    description: 'AI Slop Score (0-100)'
+  error-count:
+    description: 'Error 개수'
+  warning-count:
+    description: 'Warning 개수'
+  sarif-file:
+    description: 'SARIF 결과 파일 경로'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
